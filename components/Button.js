@@ -1,55 +1,57 @@
-import { StyleSheet, View, Pressable, Text } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import React from "react";
+import { StyleSheet } from "react-native";
+import PropTypes from 'prop-types';
+import { Button } from "galio-framework";
 
-export default function Button({ label, theme }) {
-  if (theme === "primary") {
+import argonTheme from "../constants/Theme";
+
+class ArButton extends React.Component {
+  render() {
+    const { small, shadowless, children, color, style, ...props } = this.props;
+    
+    const colorStyle = color && argonTheme.COLORS[color.toUpperCase()];
+
+    const buttonStyles = [
+      small && styles.smallButton,
+      color && { backgroundColor: colorStyle },
+      !shadowless && styles.shadow,
+      {...style}
+    ];
+
     return (
-      <View
-      style={[
-        styles.buttonContainer,
-        { borderWidth: 4, borderColor: '#ffd33d', borderRadius: 18 },
-      ]}>
-      <Pressable
-        style={[styles.button, { backgroundColor: '#fff' }]}
-        onPress={() => alert('You pressed a button.')}>
-        <FontAwesome name="picture-o" size={18} color="#25292e" style={styles.buttonIcon} />
-        <Text style={[styles.buttonLabel, { color: '#25292e' }]}>{label}</Text>
-      </Pressable>
-    </View>
+      <Button
+        style={buttonStyles}
+        shadowless
+        textStyle={{ fontSize: 12, fontWeight: '700' }}
+        {...props}
+      >
+        {children}
+      </Button>
     );
   }
+}
 
-  return (
-    <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} onPress={() => alert('You pressed a button.')}>
-          <Text style={styles.buttonLabel}>{label}</Text>
-        </Pressable>
-      </View>    
-  );
+ArButton.propTypes = {
+  small: PropTypes.bool,
+  shadowless: PropTypes.bool,
+  color: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.oneOf(['default', 'primary', 'secondary', 'info', 'error', 'success', 'warning'])
+  ])
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    width: 320,
-    height: 68,
-    marginHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 3,
+  smallButton: {
+    width: 75,
+    height: 28
   },
-  button: {
-    borderRadius: 10,
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  buttonIcon: {
-    paddingRight: 8,
-  },
-  buttonLabel: {
-    color: '#fff',
-    fontSize: 16,
+  shadow: {
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 4,
+    shadowOpacity: 0.1,
+    elevation: 2,
   },
 });
+
+export default ArButton;
