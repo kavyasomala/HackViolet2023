@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { Block, theme } from 'galio-framework';
+import { Image } from 'react-native';
 
 import { Card } from '../components';
 import articles from '../constants/articles';
@@ -13,13 +14,9 @@ class Home extends React.Component {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.articles}>
         <Block flex>
-          <Card item={articles[0]} horizontal  />
-          <Block flex row>
-            <Card item={articles[1]} style={{ marginRight: theme.SIZES.BASE }} />
-            <Card item={articles[2]} />
-          </Block>
-          <Card item={articles[3]} horizontal />
-          <Card item={articles[4]} full />
+          <Image source={{ uri: 'https://us.v-cdn.net/5021068/uploads/UWZJUKJA0FCM/turn-01.gif' }}
+style={{ width: 200, height: 400, marginTop: theme.SIZES.BASE }}
+/>
         </Block>
       </ScrollView>
     )
