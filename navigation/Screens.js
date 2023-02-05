@@ -3,7 +3,7 @@ import { Animated, Dimensions, Easing } from "react-native";
 import { Header, Icon } from "../components";
 import { argonTheme, tabs } from "../constants";
 
-import Articles from "../screens/Articles";
+import Mission from "../screens/Mission";
 import { Block } from "galio-framework";
 // drawer
 import CustomDrawerContent from "./Menu";
@@ -12,7 +12,7 @@ import Elements from "../screens/Elements";
 import Home from "../screens/Home";
 import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
-import Profile from "../screens/Profile";
+import History from "../screens/History";
 import React from "react";
 import Register from "../screens/Register";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -73,11 +73,11 @@ function ArticlesStack(props) {
       }}
     >
       <Stack.Screen
-        name="Articles"
-        component={Articles}
+        name="Mission"
+        component={Mission}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Articles" navigation={navigation} scene={scene} />
+            <Header title="Mission" navigation={navigation} scene={scene} />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" },
         }}
@@ -106,21 +106,21 @@ function ArticlesStack(props) {
 function ProfileStack(props) {
   return (
     <Stack.Navigator
-      initialRouteName="Profile"
+      initialRouteName="History"
       screenOptions={{
         mode: "card",
         headerShown: "screen",
       }}
     >
       <Stack.Screen
-        name="Profile"
-        component={Profile}
+        name="History"
+        component={History}
         options={{
           header: ({ navigation, scene }) => (
             <Header
               transparent
               white
-              title="Profile"
+              title="History"
               navigation={navigation}
               scene={scene}
             />
@@ -254,7 +254,7 @@ function AppStack(props) {
         }}
       />
       <Drawer.Screen
-        name="Profile"
+        name="History"
         component={ProfileStack}
         options={{
           headerShown: false,
@@ -275,7 +275,7 @@ function AppStack(props) {
         }}
       />
       <Drawer.Screen
-        name="Articles"
+        name="Mission"
         component={ArticlesStack}
         options={{
           headerShown: false,
